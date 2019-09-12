@@ -1,7 +1,6 @@
 import os
 from django.contrib.gis.utils import LayerMapping
-from .models import States, Counties, Arenas, Districts
-
+from .models import US_States, Counties, Arenas, Districts
 
 
 
@@ -51,7 +50,7 @@ counties_mapping = {
     'version': 'VERSION',
     'shape_leng': 'Shape_Leng',
     'shape_area': 'Shape_Area',
-    'geom': 'POLYGON',
+    'geom': 'MULTIPOLYGON',
 }
 counties_shp=os.path.abspath(os.path.join(os.path.dirname(__file__),
 'data','US_County_Boundaries.shp'))
@@ -66,13 +65,13 @@ districts_mapping = {
     'version': 'VERSION',
     'shape_leng': 'Shape_Leng',
     'shape_area': 'Shape_Area',
-    'geom': 'POLYGON',
+    'geom': 'MULTIPOLYGON',
 }
 districts_shp=os.path.abspath(os.path.join(os.path.dirname(__file__),
 'data','Congressional_Districts.shp'))
 
 # Auto-generated `LayerMapping` dictionary for States model
-states_mapping = {
+us_states_mapping = {
     'stfips': 'STFIPS',
     'state': 'STATE',
     'stpostal': 'STPOSTAL',
@@ -80,9 +79,9 @@ states_mapping = {
     'dotregion': 'DotRegion',
     'shape_leng': 'Shape_Leng',
     'shape_area': 'Shape_Area',
-    'geom': 'POLYGON',
+    'geom': 'MULTIPOLYGON',
 }
-states_shp=os.path.abspath(os.path.join(os.path.dirname(__file__),
+us_states_shp=os.path.abspath(os.path.join(os.path.dirname(__file__),
 'data','US_States.shp'))
 
 
@@ -103,7 +102,7 @@ def run(verbose=True):
     
     lm.save(strict=True, verbose=verbose)
     lm = LayerMapping(
-        States, states_shp, states_mapping,
+        US_States, us_states_shp, us_states_mapping,
         transform=False, encoding='iso-8859-1')
     
     lm.save(strict=True, verbose=verbose)

@@ -1,7 +1,5 @@
-from django.db import models
-from django.contrib.gis.db.models import PointField, PolygonField
-from django.contrib.gis.geos.collections import MultiPolygon
-# Create your models here.
+from django.contrib.gis.db import models
+
 class Arenas(models.Model):
     sector = models.CharField(max_length=30)
     subsector = models.CharField(max_length=22)
@@ -32,7 +30,7 @@ class Arenas(models.Model):
     division = models.CharField(max_length=16)
     capacity = models.FloatField()
     team = models.CharField(max_length=30)
-    geom = PointField(srid=4326)
+    geom = models.PointField(srid=4326)
 
 
 # Auto-generated `LayerMapping` dictionary for Arenas model
@@ -69,6 +67,27 @@ arenas_mapping = {
     'geom': 'POINT',
 }
 
+class US_States(models.Model):
+    stfips = models.CharField(max_length=2)
+    state = models.CharField(max_length=66)
+    stpostal = models.CharField(max_length=2)
+    version = models.CharField(max_length=2)
+    dotregion = models.IntegerField()
+    shape_leng = models.FloatField()
+    shape_area = models.FloatField()
+    geom = models.MultiPolygonField(srid=4326)
+
+# Auto-generated `LayerMapping` dictionary for US_States model
+us_states_mapping = {
+    'stfips': 'STFIPS',
+    'state': 'STATE',
+    'stpostal': 'STPOSTAL',
+    'version': 'VERSION',
+    'dotregion': 'DotRegion',
+    'shape_leng': 'Shape_Leng',
+    'shape_area': 'Shape_Area',
+    'geom': 'MULTIPOLYGON',
+}
 
 class Counties(models.Model):
     stfips = models.CharField(max_length=2)
@@ -78,7 +97,7 @@ class Counties(models.Model):
     version = models.CharField(max_length=2)
     shape_leng = models.FloatField()
     shape_area = models.FloatField()
-    geom = PolygonField(srid=4326)
+    geom = models.MultiPolygonField(srid=4326)
 
 
 # Auto-generated `LayerMapping` dictionary for Counties model
@@ -90,9 +109,8 @@ counties_mapping = {
     'version': 'VERSION',
     'shape_leng': 'Shape_Leng',
     'shape_area': 'Shape_Area',
-    'geom': 'POLYGON',
+    'geom': 'MULTIPOLYGON',
 }
-
 
 class Districts(models.Model):
     district = models.CharField(max_length=2)
@@ -103,7 +121,7 @@ class Districts(models.Model):
     version = models.CharField(max_length=2)
     shape_leng = models.FloatField()
     shape_area = models.FloatField()
-    geom = PolygonField(srid=4326)
+    geom = models.MultiPolygonField(srid=4326)
 
 
 # Auto-generated `LayerMapping` dictionary for Districts model
@@ -116,28 +134,5 @@ districts_mapping = {
     'version': 'VERSION',
     'shape_leng': 'Shape_Leng',
     'shape_area': 'Shape_Area',
-    'geom': 'POLYGON',
-}
-
-class States(models.Model):
-    stfips = models.CharField(max_length=2)
-    state = models.CharField(max_length=66)
-    stpostal = models.CharField(max_length=2)
-    version = models.CharField(max_length=2)
-    dotregion = models.IntegerField()
-    shape_leng = models.FloatField()
-    shape_area = models.FloatField()
-    geom = PolygonField(srid=4326)
-
-
-# Auto-generated `LayerMapping` dictionary for States model
-states_mapping = {
-    'stfips': 'STFIPS',
-    'state': 'STATE',
-    'stpostal': 'STPOSTAL',
-    'version': 'VERSION',
-    'dotregion': 'DotRegion',
-    'shape_leng': 'Shape_Leng',
-    'shape_area': 'Shape_Area',
-    'geom': 'POLYGON',
+    'geom': 'MULTIPOLYGON',
 }
