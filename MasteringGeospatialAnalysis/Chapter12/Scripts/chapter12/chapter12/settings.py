@@ -78,9 +78,9 @@ WSGI_APPLICATION = 'chapter12.wsgi.application'
 DATABASES = {
     'default': {
          'ENGINE': 'django.contrib.gis.db.backends.postgis',
-         'NAME': 'chapter12',
-         'USER': 'postgresuser',
-         'PASSWORD': 'password',
+         'NAME': 'ch12',
+         'USER': 'postgres',
+         'PASSWORD': 'postgres',
          'PORT':'5432'
     },
 }

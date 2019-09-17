@@ -155,7 +155,7 @@ scf.setSelectedFeatures(closed)
 import processing 
 processing.alglist() 
 
-processing.alglist(“buffer”)
+processing.alglist(ï¿½bufferï¿½)
 
 processing.alghelp("gdalogr:buffervectors") 
 
